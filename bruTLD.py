@@ -3,12 +3,13 @@
 import asyncio
 import itertools
 import string
+import sys
 
 
 
 length = 2
-port = 80
-domain = "example"
+domain = sys.argv[1]
+port = sys.argv[2]
 
 combos = itertools.product(string.ascii_lowercase, repeat=length)
 urls = [f"{domain}.{''.join(tld)}" for tld in combos]
@@ -29,5 +30,8 @@ async def main(tasks):
 
 
 if __name__ == "__main__":
+    if len(sys.argv) < 3:
+        print("Please provide a domain and port as an argument.")
+        sys.exit()
     tasks = [check_tld(url, port) for url in urls]
     asyncio.run(main(tasks=tasks))
