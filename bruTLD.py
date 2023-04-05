@@ -7,12 +7,12 @@ import sys
 
 
 
-length = 2
-domain = sys.argv[1]
-port = sys.argv[2]
+length = sys.argv[1]
+keyword = sys.argv[2]
+port = sys.argv[3]
 
 combos = itertools.product(string.ascii_lowercase, repeat=length)
-urls = [f"{domain}.{''.join(tld)}" for tld in combos]
+urls = [f"{keyword}.{''.join(tld)}" for tld in combos]
 
 
 async def check_tld(url, port):
@@ -30,8 +30,12 @@ async def main(tasks):
 
 
 if __name__ == "__main__":
-    if len(sys.argv) < 3:
-        print("Please provide a domain and port as an argument.")
+    if len(sys.argv) != 4:
+        print("""
+            Please provide TLD's length, keyword, and port as arguments.
+            
+            Example usage: python3 bruTLD.py 3 google 443
+        """)
         sys.exit()
     tasks = [check_tld(url, port) for url in urls]
     asyncio.run(main(tasks=tasks))
