@@ -1,5 +1,5 @@
 # bruTLD
-Handy tool bruteforcing TLDs of agiven length for a given domain/brand.
+Handy tool for bruteforcing TLDs of a given length for a given domain/brand.
 
 Used as a part of the usual recon.
 
